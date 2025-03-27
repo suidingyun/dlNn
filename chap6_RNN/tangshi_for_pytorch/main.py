@@ -3,8 +3,7 @@ import collections
 import torch
 from torch.autograd import Variable
 import torch.optim as optim
-
-import rnn
+import rnn as rnn_lstm
 
 start_token = 'G'
 end_token = 'E'
@@ -165,7 +164,7 @@ def run_training():
             optimizer.step()
 
             if batch % 20 ==0:
-                torch.save(rnn_model.state_dict(), './poem_generator_rnn')
+                # torch.save(rnn_model.state_dict(), './poem_generator_rnn')
                 print("finish  save model")
 
 
@@ -198,7 +197,7 @@ def gen_poem(begin_word):
     rnn_model = rnn_lstm.RNN_model(batch_sz=64, vocab_len=len(word_int_map) + 1, word_embedding=word_embedding,
                                    embedding_dim=100, lstm_hidden_dim=128)
 
-    rnn_model.load_state_dict(torch.load('./poem_generator_rnn'))
+    # rnn_model.load_state_dict(torch.load('./poem_generator_rnn'))
 
     # 指定开始的字
 
